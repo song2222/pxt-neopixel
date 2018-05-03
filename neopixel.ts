@@ -53,6 +53,8 @@ namespace neopixel {
         _length: number; // number of LEDs
         _mode: NeoPixelMode;
         _matrixWidth: number; // number of leds in a matrix - if any
+		_matrixChain: number; // the connection type of matrix chain
+		_matrixRotation: number; // the rotation type of matrix
 
         /**
          * Shows all LEDs to a given color (range 0-255 for r, g, b). 
@@ -183,13 +185,17 @@ namespace neopixel {
         /**
          * Sets the number of pixels in a matrix shaped strip
          * @param width number of pixels in a row
+		 * @param rotation type of matrix
+		 * @param chain type of matrix
          */
-        //% blockId=neopixel_set_matrix_width block="%strip|set matrix width %width"
+        //% blockId=neopixel_set_matrix_width block="%strip|set matrix width %width|rotation %rotation|chain %chain"
         //% blockGap=8
         //% weight=5
         //% parts="neopixel" advanced=true
-        setMatrixWidth(width: number) {
+        setMatrixWidth(width: number, rotation: number, chain: number) {
             this._matrixWidth = Math.min(this._length, width);
+			this._matrixRotation = rotation;
+			this._matrixChain = chain;
         }
 
         /**
@@ -205,7 +211,22 @@ namespace neopixel {
         setMatrixColor(x: number, y: number, rgb: number) {
             if (this._matrixWidth <= 0) return; // not a matrix, ignore
             const cols = this._length / this._matrixWidth;
-            if (x < 0 || x >= this._matrixWidth || y < 0 || y >= cols) return;
+
+			if (this._matrixRotation == 1){
+				let t = y;
+				y = x;
+				x = t;
+			} else if (this._matrixRotation == 2){
+				x = this._matrixWidth - x -1;
+			}
+			
+
+			// here be the physical mapping
+			if (this._matrixChain == 1 && y%2 == 1){
+				x = this._matrixWidth - x -1;
+			}
+			if (x < 0 || x >= this._matrixWidth || y < 0 || y >= cols) return;
+			
             let i = x + y * this._matrixWidth;
             this.setPixelColor(i, rgb);
         }
