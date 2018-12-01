@@ -1,6 +1,13 @@
 {
     let strip = neopixel.create(DigitalPin.P0, 24, NeoPixelMode.RGB);
 
+    strip.showRainbow();
+    for (let i = 0; i <= strip.length(); i++) { 
+        strip.rotate();
+        strip.show();
+        basic.pause(100)
+    }
+    
     strip.showColor(NeoPixelColors.Red)
     basic.pause(2000)
     strip.showColor(NeoPixelColors.Green)
@@ -56,9 +63,9 @@
     });
 
     while (true) {
-        let x = input.acceleration(Dimension.X) / 2
-        let y = input.acceleration(Dimension.Y) / 2
-        let z = input.acceleration(Dimension.Z) / 2
+        let x = input.acceleration(Dimension.X) >> 1
+        let y = input.acceleration(Dimension.Y) >> 1
+        let z = input.acceleration(Dimension.Z) >> 1
         if (rotationMode) {
             strip.rotate();
         } else {
