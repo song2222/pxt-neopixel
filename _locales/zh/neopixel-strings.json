@@ -26,9 +26,9 @@
   "neopixel.Strip.shift|block": "%strip|移动像素 偏移量%offset",
   "neopixel.Strip.rotate|block": "%strip|循环像素 偏移量%offset",
   "neopixel.hsl|block": "色相 %h|饱和度 %s|亮度 %l",
-  "neopixel.power|block": "%strip| 电流(mA)",
-  "neopixel.setMatrixWidth|block": "%strip|设置矩阵宽度 %width",
-  "neopixel.setMatrixColor|block": "%string|设置像素点 （坐标）x %x|y %y|颜色 %rgb=neopixel_colors",
+  "neopixel.Strip.power|block": "%strip| 电流(mA)",
+  "neopixel.Strip.setMatrixWidth|block": "%strip|设置矩阵宽度 %width|旋转 %rotation|链路 %chain",
+  "neopixel.Strip.setMatrixColor|block": "%strip|设置矩阵像素 x %x|y %y|为 %rgb=neopixel_colors",
   "neopixel.create|block": "引脚%pin|初始化灯带|%numleds|颗LED（模式%mode|）",
   "neopixel.rgb|block": "RGB（红%red|绿%green|蓝%blue|）"
 }
